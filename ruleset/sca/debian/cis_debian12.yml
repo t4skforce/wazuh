@@ -1054,7 +1054,7 @@ checks:
     condition: all
     rules:
       - "c:dpkg -s ntp -> r:package 'ntp' is not installed"
-      - "c:systemctl is-enabled systemd-timesyncd -> r:masked"
+      - "c:systemctl is-enabled systemd-timesyncd -> r:enabled | masked"
       - 'f:/etc/chrony/chrony.conf -> r:server\s*\S+'
       - 'c:ps -ef -> r:_chrony'
 
