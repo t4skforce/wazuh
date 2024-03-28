@@ -799,8 +799,8 @@ checks:
       - pci_dss_v3.2.1: ["7.1", "7.1.1", "7.1.2", "7.1.3"]
     condition: all
     rules:
-      - 'not f:/boot/grub/grub.cfg -> r:\s*linux && !r:apparmor=1'
-      - 'not f:/boot/grub/grub.cfg -> r:\s*linux && !r:security=apparmor'
+      - 'not f:/boot/grub/grub.cfg -> r:\s*linux && r:apparmor=1'
+      - 'not f:/boot/grub/grub.cfg -> r:\s*linux && r:security=apparmor'
 
   # 1.7.1.3 Ensure all AppArmor Profiles are in enforce or complain mode (Automated)
   - id: 33039
