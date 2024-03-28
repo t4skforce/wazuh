@@ -1036,7 +1036,7 @@ checks:
       - "c:dpkg -s ntp -> r:package 'ntp' is not installed"
       - "c:dpkg -s chrony -> r:package 'chrony' is not installed"
       - "c:systemctl is-enabled systemd-timesyncd.service -> r:enabled"
-      - "c:timedatectl status -> r:NTP enabled: yes | NTP synchronized: yes"
+      - "c:timedatectl status -> r:NTP service: active | NTP enabled: yes | NTP synchronized: yes"
 
    # 2.1.1.3 Ensure chrony is configured (Automated)
   - id: 33051
