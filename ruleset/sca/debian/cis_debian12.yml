@@ -1934,7 +1934,7 @@ checks:
     rules:
       - "c:dpkg-query -s ufw -> r:package 'ufw' is not installed"
       - 'c:ufw status -> r:inactive'
-      - 'c:systemctl is-enabled ufw -> r:masked'
+      - 'c:systemctl is-enabled ufw -> r:disabled'
 
  ############################################
  # 3.6.3.2 Configure IPv4 iptables
