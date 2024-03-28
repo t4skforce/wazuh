@@ -971,7 +971,7 @@ checks:
       - pci_dss_v3.2.1: ["2.2"]
     condition: all
     rules:
-      - 'c:dpkg -s GDM -> r:install ok installed'
+      - "c:dpkg -s gdm3 -> r:package 'gdm3' is not installed"
       - 'f:/etc/gdm3/greeter.dconf-defaults -> r:banner-message-enable=true'
       - 'f:/etc/gdm3/greeter.dconf-defaults -> r:banner-message-text=\S+'
       - 'f:/etc/gdm3/greeter.dconf-defaults -> r:disable-user-list=true'
