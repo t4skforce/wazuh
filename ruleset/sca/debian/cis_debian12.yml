@@ -2405,7 +2405,6 @@ checks:
       - nist_sp_800-53: ["AU-3"]
       - pci_dss_v3.2.1: ["10.2.4"]
     condition: all
-    rules:euid!=uid
       - 'c:auditctl -l -> r:^-a && r:exit,always|always,exit && r:-F arch=b32|-F arch=b64 && r:-C uid!=euid|-C euid!=uid && r:-F euid=0|-F auid>=1000|-F auid!=-1|-F auid!=4294967295 && r:-S execve && r:-k actions|key=actions'
       - 'd:/etc/audit/rules.d -> r:\.+.rules$ -> r:^-a && r:exit,always|always,exit && r:-F arch=b32|-F arch=b64 && r:-C uid!=euid|-C euid!=uid && r:-F euid=0|-F auid>=1000|-F auid!=-1|-F auid!=4294967295 && r:-S execve && r:-k actions|key=actions'
 
