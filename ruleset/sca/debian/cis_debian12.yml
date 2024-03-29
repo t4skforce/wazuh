@@ -1072,7 +1072,7 @@ checks:
       - pci_dss_v3.2.1: ["10.4"]
     condition: all
     rules:
-      - "c:dpkg -s chrony -> r:package 'ntp' is not installed"
+      - "c:dpkg -s ntp -> r:package 'ntp' is not installed"
       - "c:systemctl is-enabled systemd-timesyncd -> r:enabled|masked"
       - 'f:/etc/ntp.conf -> r:restrict -(d+) && r:default && r:kod && r:nomodify && r:notrap && r:nopeer && r:noquery'
       - 'f:/etc/ntp.conf -> r:restrict -6 && r:default && r:kod && r:nomodify && r:notrap && r:nopeer && r:noquery'
