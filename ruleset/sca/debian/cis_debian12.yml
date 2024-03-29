@@ -2241,8 +2241,8 @@ checks:
     rules:
       - 'd:/etc/audit/rules.d -> r:\.+.rules$ -> r:^-w && r:/etc/apparmor/|/etc/apparmor\s+ && r:-p wa && r:-k MAC-policy|key=MAC-policy'
       - 'd:/etc/audit/rules.d -> r:\.+.rules$ -> r:^-w && r:/etc/apparmor.d/|/etc/apparmor.d\s+ && r:-p wa && r:-k MAC-policy|key=MAC-policy'
-      - 'c:auditctl -l -> r:^-w && r:/etc/apparmor/|/etc/apparmor\\s+ && r:-p wa && r:-k MAC-policy|key=MAC-policy'
-      - 'c:auditctl -l -> r:^-w && r:/etc/apparmor.d/|/etc/apparmor.d\\s+ && r:-p wa && r:-k MAC-policy|key=MAC-policy'
+      - 'c:auditctl -l -> r:^-w && r:/etc/apparmor/|/etc/apparmor\s+ && r:-p wa && r:-k MAC-policy|key=MAC-policy'
+      - 'c:auditctl -l -> r:^-w && r:/etc/apparmor.d/|/etc/apparmor.d\s+ && r:-p wa && r:-k MAC-policy|key=MAC-policy'
 
   # 4.1.7 Ensure login and logout events are collected. (Automated)
   - id: 33112
