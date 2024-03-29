@@ -2406,8 +2406,8 @@ checks:
       - pci_dss_v3.2.1: ["10.2.4"]
     condition: all
     rules:      
-      - 'd:/etc/audit/rules.d -> r:\.+.rules$ -> r:^-a && r:exit,always|always,exit && r:-F arch=b64|-F arch=b32 && r:-C uid\!=euid && r:-F euid=0|-F auid\>=1000|-F auid\!=-1|-F auid\!=4294967295 && r:-S execve && && r:-k actions|key=actions'
-      - 'c:auditctl -l -> r:^-a && r:exit,always|always,exit && r:-F arch=b64|-F arch=b32 && r:-C uid\!=euid && r:-F euid=0|-F auid\>=1000|-F auid\!=-1|-F auid\!=4294967295 && r:-S execve && && r:-k actions|key=actions'
+      - 'd:/etc/audit/rules.d -> r:\.+.rules$ -> r:^-a && r:exit,always|always,exit && r:-F arch=b64|-F arch=b32 && r:-C uid\!=euid && r:-F euid=0|-F auid\>=1000|-F auid\!=-1|-F auid\!=4294967295 && r:-S execve && r:-k actions|key=actions'
+      - 'c:auditctl -l -> r:^-a && r:exit,always|always,exit && r:-F arch=b64|-F arch=b32 && r:-C uid\!=euid && r:-F euid=0|-F auid\>=1000|-F auid\!=-1|-F auid\!=4294967295 && r:-S execve && r:-k actions|key=actions'
 
   # 4.1.16 Ensure kernel module loading and unloading is collected. (Automated)
   - id: 33120
