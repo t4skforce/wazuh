@@ -3298,8 +3298,8 @@ checks:
     condition: all
     rules:
       - 'f:/etc/login.defs -> n:^\s*PASS_WARN_AGE\s*\t*(\d+) compare >= 7'
-      - 'f:/etc/shadow -> n:^\w+:\S*:\S*:\S*:\S*:(\d+):\S*:\S*:\S* compare >= 7'
-      - 'not f:/etc/shadow -> r:^\w+:\S*:\S*:\S*:\S*::\S*:\S*:\S*'
+      - 'f:/etc/shadow -> !r:^\w+:!|^\w+:\p: && n:^\w+:\S*:\S*:\S*:\S*:(\d+):\S*:\S*:\S* compare >= 7'
+      - 'not f:/etc/shadow -> !r:^\w+:!|^\w+:\p: && r:^\w+:\S*:\S*:\S*:\S*::\S*:\S*:\S*'
 
   # 5.4.1.4 Ensure inactive password lock is 30 days or less. (Automated)
   - id: 33167
