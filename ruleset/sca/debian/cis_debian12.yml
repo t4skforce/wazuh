@@ -3194,7 +3194,7 @@ checks:
     title: "Ensure lockout for failed password attempts is configured."
     description: "Lock out users after n unsuccessful consecutive login attempts. The first sets of changes are made to the PAM configuration files. The second set of changes are applied to the program specific PAM configuration file. The second set of changes must be applied to each program that will lock out users. Check the documentation for each secondary program for instructions on how to configure them to work with PAM. - deny=n - n represents the number of failed attempts before the account is locked - unlock_time=n - n represents the number of seconds before the account is unlocked - audit - Will log the user name into the system log if the user is not found. - silent - Don't print informative messages. Set the lockout number and unlock time in accordance with local site policy. Notes: - Add pam_tally2 to the account section account required pam_tally2.so for the counter to reset to 0 when using sudo - Use of the \"audit\" keyword may log credentials in the case of user error during - authentication. This risk should be evaluated in the context of the site policies of your organization. If a user has been locked out because they have reached the maximum consecutive failure count defined by deny= in the pam_tally2.so module, the user can be unlocked by issuing the command /sbin/pam_tally2 -u <username> --reset. This command sets the failed count to 0, effectively unlocking the user."
     rationale: "Locking out user IDs after n unsuccessful consecutive login attempts mitigates brute force password attacks against your systems."
-    remediation: "Edit the /etc/pam.d/common-auth file and add the auth line below: auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900 Edit the /etc/pam.d/common-account file and add the account lines bellow: account requisite pam_deny.so account required pam_tally2.so."
+    remediation: "Set password lockouts to conform to site policy. Many distributions provide tools for updating PAM configuration, consult your documentation for details. If no tooling is provided edit the appropriate /etc/pam.d/ configuration file and add or modify the pam_tally2.so or pam_faillock.so lines as appropriate: auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900 auth required pam_faillock.so preauth audit silent deny=5 unlock_time=900 auth sufficient pam_unix.so auth [default=die] pam_faillock.so authfail audit deny=5 unlock_time=900 auth sufficient pam_faillock.so authsucc audit deny=5 unlock_time=900 Notes: Consult your documentation for the appropriate PAM file and module"
     compliance:
       - cis: ["5.3.2"]
       - cis_csc_v7: ["16.7"]
@@ -3205,10 +3205,9 @@ checks:
       - pci_dss_v3.2.1: ["8.1.3", "8.1.4"]
     condition: all
     rules:
-       - 'f:/etc/pam.d/common-auth -> !r:^# && r:auth\s*\t*required\s*\t*pam_tally2.so && r:onerr=fail && r:audit && r:silent && r:deny\s*=\s*\d+ && r:unlock_time\s*=\s*\d+'
-       - 'f:/etc/pam.d/common-auth -> n:deny\s*=\s*(\d+) compare <=5'
+       - 'f:/etc/pam.d/common-auth -> !r:^# && r:auth\s*\t*required\s*\t* && r:pam_tally2.so|pam_faillock.so'
        - 'f:/etc/pam.d/common-account -> !r:^# && r:account\s*\t*requisite\s*\t*pam_deny.so'
-       - 'f:/etc/pam.d/common-account -> !r:^# && r:account\s*\t*required\s*\t*pam_tally2.so'
+       - 'f:/etc/pam.d/common-account -> !r:^# && r:account\s*\t*required\s*\t* && r:pam_tally2.so|pam_faillock.so'
 
   # 5.3.3 Ensure password reuse is limited. (Automated)
   - id: 33162
